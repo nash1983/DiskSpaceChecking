@@ -7,8 +7,8 @@ from email.mime.text import MIMEText
 def colored_mail():
     msg = MIMEMultipart('alternative')
     msg['Subject'] = f"{compName} Disk Usage Statistics \n\n"
-    msg['From'] = "easupport@boltonclarke.com.au"
-    msg['To'] = "ISEnterpriseApplications@boltonclarke.com.au"
+    msg['From'] = "fromAddress"
+    msg['To'] = "toAddress"
 
     text = (f"Warning: <br>\n"
             f" ***********************************************  <br>\n"
@@ -35,13 +35,13 @@ def colored_mail():
     msg.attach(part1)  # text must be the first one
     msg.attach(part2)  # html must be the last one
 
-    s = smtplib.SMTP('relay.rslc.local', 25)
+    s = smtplib.SMTP('relay*****', 25)
     s.sendmail(msg['From'], msg['To'], msg.as_string())
     s.quit()
 
 
 def sending_mail():
-    with smtplib.SMTP('relay.rslc.local', 25) as smtp:
+    with smtplib.SMTP('relay****', 25) as smtp:
         body2 = (
             f"*********************************************** \n"
             f"{path} - Less than 10% disk space is remaining  \n "
@@ -49,14 +49,12 @@ def sending_mail():
             f"Total Disk size is: {disk_total1} GB \n"
             f"Total Free space is: {disk_free1} GB \n"
             f"Total Used space is: {disk_used1} GB\n")
-        smtp.sendmail(from_addr='easupport@boltonclarke.com.au',
-                      to_addrs='ISEnterpriseApplications@boltonclarke.com.au',
+        smtp.sendmail(from_addr='fromAddress',
+                      to_addrs='toAddress',
                       msg=f"Subject:{compName} Disk Usage Statistics \n\n {body2}")
 
 
-workstations = ['t1sqlag01', 't1sqlag02', 'Prd-cc0-sql01', 'prd-cc0-sql02', 'prd-cc0-sql03', 'prd-CMC0-SQL01',
-                'PRD-CMC0-SQL02', 'PRD-CMC0-SQL03', 'PRD-PROCSQL01', 'PRD-PROCSQL02', 'PRD-PROCSQL03', 'PRD-YCH0-SQL01',
-                'RSLSQL', 'RSLSQLDAG01', 'RSLSQLDAG02', 'P2SQLAG01', 'P2SQLAG02', 'PRD-ACSQL01', 'PRD-ACSQL02']
+workstations = ['ComputerList']
 
 for compName in workstations:
     path1 = '\\\\' + compName + '\\C$'
