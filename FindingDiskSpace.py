@@ -3,10 +3,12 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+# this code is to check server diskspace and send coloured email to monitoring team. If disk space is lessthan 5% it triggers red colour mail 
 
 def colored_mail():
     msg = MIMEMultipart('alternative')
     msg['Subject'] = f"{compName} Disk Usage Statistics \n\n"
+#     Add from address & To address
     msg['From'] = "fromAddress"
     msg['To'] = "toAddress"
 
@@ -49,11 +51,12 @@ def sending_mail():
             f"Total Disk size is: {disk_total1} GB \n"
             f"Total Free space is: {disk_free1} GB \n"
             f"Total Used space is: {disk_used1} GB\n")
+#         Add from address and to address 
         smtp.sendmail(from_addr='fromAddress',
                       to_addrs='toAddress',
                       msg=f"Subject:{compName} Disk Usage Statistics \n\n {body2}")
 
-
+# add server names 
 workstations = ['ComputerList']
 
 for compName in workstations:
